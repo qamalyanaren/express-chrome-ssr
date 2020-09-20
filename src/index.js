@@ -2,8 +2,7 @@ import express from 'express';
 import puppeteer from 'puppeteer';
 
 // Routes
-import { test } from './functions/test.js'
-import { ssr } from './functions/ssr.js'
+import { ssr } from './ssr.js'
 
 const app = express();
 
@@ -15,7 +14,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get('/test', test);
 
 let browserWSEndpoint = null;
 app.get('/ssr', async (req, res, next) => {
