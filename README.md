@@ -38,7 +38,7 @@ For build and production environments...
 $ git clone https://github.com/qamalyanaren/express-chrom-ssr
 $ cd express-chrom-ssr
 $ npm install (or yarn install)
-$ npm run build && npm run server (or yarn build && yarn start)
+$ npm run build && npm run start (or yarn build && yarn start)
 ```
 
 ### Usage
