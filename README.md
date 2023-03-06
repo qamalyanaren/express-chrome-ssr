@@ -66,6 +66,7 @@ A server will be spawned accesible on [localhost:3000](http://localhost:3000) wi
 For production release:
 ```sh
 $ npm run build (or yarn build)
+```
 
 #### TROUBLESHOOTING:
 https://medium.com/@ssmak/how-to-fix-puppetteer-error-while-loading-shared-libraries-libx11-xcb-so-1-c1918b75acc3
