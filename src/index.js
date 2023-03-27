@@ -1,5 +1,6 @@
 import express from 'express';
 import puppeteer from 'puppeteer';
+import isbot from 'isbot'
 
 // Routes
 import { ssr } from './ssr.js'
@@ -16,20 +17,25 @@ app.use((req, res, next) => {
 
 
 let browserWSEndpoint = null;
-app.get('/ssr', async (req, res, next) => {
+app.get('/ssr', async(req, res, next) => {
 
 	const { url } = req.query;
-
+	console.log('url', url);
 	if (!url) {
 		return res.status(400).send('Invalid url param: Example: ?url=https://binge.app');
 	}
-
+	console.log('isbot', isbot(req.get('user-agent')))
+	if (!isbot(req.get('user-agent'))) {
+		res.writeHead(301, { Location: url });
+		res.end();
+		return ;
+	}
 	// console.time(`URL_START:${url}`)
 	// console.log(`browserWSEndpoint is::${(browserWSEndpoint)}`)
 	// Spin new instance if we dont have an active one
 	if (!browserWSEndpoint) {
 		// const browser = await puppeteer.launch();
-		const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+		const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
 		browserWSEndpoint = await browser.wsEndpoint();
 	}
 
